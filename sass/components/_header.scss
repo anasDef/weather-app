@@ -1,0 +1,116 @@
+@use "../variables/variables" as *;
+@use "../mixins/mixins" as *;
+
+.header {
+  width: 95%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 40px;
+  margin-inline: auto;
+
+  // Wrapper that positions the dropdown relative to the trigger button
+  &__unites {
+    position: relative;
+    width: 200px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  // "Units" trigger button — opens the dropdown on click
+  &__button {
+    @include button(
+      $bg: $neutral-800,
+      $bg-hover: $neutral-700,
+      $radius: 7px,
+      $w: 70%,
+      $h: 40px
+    );
+    justify-content: center;
+    max-width: 70%;
+    min-width: 50%;
+    padding: 10px 15px;
+  }
+
+  & span {
+    margin-inline: 5px;
+  }
+
+  // ── Dropdown panel ─────────────────────────────────────────────────────────
+  &__lists {
+    @include droplist(100%);
+    top: 130%; // Position just below the trigger button
+
+    // Hidden by default — slides up out of view using translateY
+    transform: translateY(-750px);
+    transition: 0.3s ease;
+
+    // JS toggles this class to slide the panel into view
+    &.active {
+      transform: translateY(0);
+    }
+
+    // On mobile, extend width past the parent so the panel doesn't feel cramped
+    @include breakpoints("small") {
+      width: 150%;
+    }
+  }
+
+  // Each unit category group (Temperature, Wind Speed, Precipitation)
+  &__list {
+    padding: 10px 0px 15px;
+    border-bottom: 1px solid $neutral-600; // Visual separator between groups
+  }
+
+  // Remove the bottom border from the last group
+  &__list:last-child {
+    border: none;
+  }
+
+  // "Switch to imperial/metric" toggle button inside the dropdown
+  &__switcher {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    background-color: transparent;
+    text-align: left;
+    font-family: $font-dmSans;
+    font-size: 1rem;
+    cursor: pointer;
+    color: $neutral-0;
+
+    &:hover {
+      border: 1px solid $neutral-600;
+      background-color: $neutral-700;
+    }
+  }
+
+  // Individual unit option row (e.g. "Celsius", "km/h")
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    // Checkmark icon hidden by default; only shown on the active item
+    img {
+      display: none;
+    }
+
+    // Active state: highlight background and show the checkmark
+    &.active {
+      background-color: $neutral-700;
+      border: 1px solid $neutral-600;
+    }
+
+    &.active img {
+      display: block;
+    }
+  }
+
+  // Group label above each unit list (e.g. "Temperature")
+  &__title {
+    color: $neutral-300;
+    margin-left: 7px;
+  }
+}

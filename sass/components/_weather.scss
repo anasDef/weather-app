@@ -1,0 +1,240 @@
+@use "../mixins/mixins" as *;
+@use "../variables/variables" as *;
+
+.weather {
+  // ─── Left Section ───────────────────────────────────────────────────────────
+
+  &__current {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  // Hero card showing location, date, temperature, and weather icon
+  &__main-info {
+    background-image: linear-gradient(to right, $blue-700, $blue-500);
+    border-radius: 20px;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+  }
+
+  &__city {
+    color: $neutral-0;
+    font-size: 1.7rem;
+    font-weight: $fw-700;
+    margin-bottom: 5px;
+    text-transform: capitalize;
+  }
+
+  &__date {
+    color: $neutral-200;
+    font-weight: $fw-500;
+  }
+
+  // Flex row that holds the weather icon and the temperature value side by side
+  &__temperature {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  // Weather condition icon injected dynamically by current-weather.js
+  &__weather-icon {
+    order: 0; // Icon appears before the temperature number in the flex row
+    width: 120px;
+    height: 120px;
+  }
+
+  &__main-temp {
+    // Fluid font size: scales between 5rem and 7rem based on viewport width
+    font-size: clamp(5rem, 6.5vw, 7rem);
+    font-weight: $fw-700;
+    color: $neutral-0;
+  }
+
+  // ─── Detail Cards Grid ───────────────────────────────────────────────────────
+  // Auto-fill grid: cards are at least 150px wide and expand to fill available space
+  &__details {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+  }
+
+  // Individual detail card (Feels Like, Humidity, Wind, Precipitation)
+  &__weather-box {
+    background-color: $neutral-700;
+    border-radius: 20px;
+    padding: 15px;
+    border: 1px solid $neutral-600;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 30px;
+    transition: 0.3s ease;
+
+    // Subtle lift effect on hover to make cards feel interactive
+    &:hover {
+      transform: translateY(10px);
+      background-color: $neutral-800;
+    }
+  }
+
+  &__detail-title {
+    color: $neutral-200;
+    font-weight: $fw-300;
+    font-size: 1.2rem;
+  }
+
+  &__detail-value {
+    color: $neutral-0;
+    // Fluid font size: scales between 1.5rem and 2rem based on viewport width
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    font-weight: $fw-300;
+  }
+
+  &__forecast-title {
+    color: $neutral-0;
+    font-weight: $fw-500;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  &__daily-forecast {
+    margin-top: 20px;
+    height: fit-content;
+
+    .weather__forecast-list {
+      // height:;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 10px;
+    }
+
+    .weather__forecast-card {
+      @include forecast-card(column, $neutral-700);
+      height: 100%;
+    }
+
+    .weather__forecast-date {
+      font-weight: $fw-300;
+      color: $neutral-200;
+    }
+
+    .weather__forecast-cardIcon {
+      width: 70px;
+      height: 70px;
+    }
+
+    .weather__forecast-cardTemp {
+      font-size: 1rem;
+      font-weight: $fw-300;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+  }
+
+  // ─── Right Section ───────────────────────────────────────────────────────────
+  &__right-section {
+    background-color: $neutral-700;
+    border-radius: 20px;
+    padding: 20px;
+    min-height: 650px;
+    max-height: 650px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-x: hidden;
+
+    .weather__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .weather__days {
+      position: relative;
+    }
+
+    .weather__days-list {
+      @include droplist(120%);
+      margin-top: 10px;
+      border-width: 2px;
+      transform: translateY(-750px);
+      transition: 0.3s ease;
+
+      &.active {
+        transform: translateY(0);
+      }
+    }
+
+    .weather__button {
+      @include button($neutral-600, $neutral-800, 10px, 120px, 40px);
+      padding: 20px;
+      gap: 10px;
+      justify-content: center;
+      text-transform: capitalize;
+    }
+
+    .weather__forecast-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 100%;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 5px;
+        margin-left: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $neutral-600;
+        border-radius: 10px;
+      }
+    }
+
+    .weather__forecast-card {
+      @include forecast-card(row, $neutral-600);
+      padding-block: 5px;
+      width: 98%;
+      margin-inline: auto;
+    }
+
+    .weather__time {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 1.2rem;
+      font-weight: $fw-500;
+
+      img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+  }
+
+  // ─── Mobile Overrides ───────────────────────────────────────────────────────
+  @include breakpoints("small") {
+    // Use the smaller background image variant on mobile
+    &__main-info {
+      flex-direction: column; // Stack location and temperature vertically
+    }
+
+    &__city {
+      text-align: center;
+    }
+
+    &__location {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}

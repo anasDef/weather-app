@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link
+      rel="shortcut icon"
+      href="./images/favicon-32x32.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./dist/main.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Now</title>
+  </head>
+  <body>
+    <!-- ============= HEADER ============ -->
+    <header class="header">
+      <!-- ===== Logo ==== -->
+      <div class="logo">
+        <img src="./images/logo.svg" alt="logo" />
+      </div>
+
+      <!-- ==== Unites ==== -->
+      <div class="header__unites">
+        <!-- == unites button == -->
+        <button
+          class="header__button"
+          id="show-dropdown-btn"
+          tabindex="0"
+          role="button"
+        >
+          <img src="./images/icon-units.svg" alt="settings icon" />
+          <span>Unites</span>
+          <img src="./images/icon-dropdown.svg" alt="arrow down" />
+        </button>
+
+        <!-- == unites lists == -->
+        <div class="header__lists" id="header-lists">
+          <button
+            class="header__switcher"
+            role="switch"
+            data-system="metric"
+            id="switch-btn"
+          >
+            Switch to <span id="unite-system">imperial</span>
+          </button>
+          <!-- list 1 -->
+          <ul class="header__list">
+            <span class="header__title">Temperature</span>
+            <li
+              class="header__item active"
+              data-category="temperature"
+              data-unite="celsius"
+            >
+              Celsius (°C)
+              <img src="./images/icon-checkmark.svg" alt="checkmark icon" />
+            </li>
+
+            <li
+              class="header__item"
+              data-category="temperature"
+              data-unite="fahrenheit"
+            >
+              Fahrenheit (°F)
+              <img src="./images/icon-checkmark.svg" alt="checkmark icon" />
+            </li>
+          </ul>
+
+          <!-- list 2 -->
+          <ul class="header__list">
+            <span class="header__title">Wind Speed</span>
+            <li
+              class="header__item active"
+              data-category="wind"
+              data-unite="kmh"
+            >
+              km/h
+              <img src="./images/icon-checkmark.svg" alt="checkmark icon" />
+            </li>
+
+            <li class="header__item" data-category="wind" data-unite="mph">
+              mph
+              <img src="./images/icon-checkmark.svg" alt="checkmark icon" />
+            </li>
+          </ul>
+
+          <!-- list 3 -->
+          <ul class="header__list">
+            <span class="header__title">Precipitation</span>
+            <li
+              class="header__item active"
+              data-category="precipitation"
+              data-unite="mm"
+            >
+              Millimeters (mm)
+              <img src="./images/icon-checkmark.svg" alt="checkmark icon" />
+            </li>
+
+            <li
+              class="header__item"
+              data-category="precipitation"
+              data-unite="inch"
+            >
+              Inches (in)
+              <img src="./images/icon-checkmark.svg" alt="checkmark icon" />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div class="container" id="container">
+      <!-- ============= SEARCH SECTION ============ -->
+      <section class="search">
+        <!-- ===== Title ==== -->
+        <h1 class="search__title">How's the sky looking today?</h1>
+
+        <!-- ===== Search bar ===== -->
+        <div class="search__search-bar">
+          <!-- == input == -->
+          <div class="search__wrapper">
+            <img
+              src="./images/icon-search.svg"
+              alt="search icon"
+              class="search__search-icon"
+            />
+            <input
+              type="text"
+              class="search__input"
+              placeholder="Search for a place..."
+              aria-label="Search for a place..."
+              id="search-inp"
+            />
+
+            <!-- search suggestions -->
+            <ul class="search__suggestions" id="suggestions"></ul>
+          </div>
+
+          <!-- == search button == -->
+          <button class="search__search-btn" id="search-btn">Search</button>
+        </div>
+      </section>
+
+      <h2 class="no-resultMsg">No search result found!</h2>
+
+      <main class="weather">
+        <section class="weather__left-section">
+          <!-- ====== Current Weather ======= -->
+          <div class="weather__current">
+            <!-- == main info == -->
+            <div class="weather__main-info">
+              <!-- location -->
+              <div class="weather__location">
+                <h3 class="weather__city" id="location"></h3>
+                <span class="weather__date" id="date"></span>
+              </div>
+
+              <!-- temperature -->
+              <div class="weather__temperature">
+                <h3 class="weather__main-temp" id="main-temperature"></h3>
+              </div>
+            </div>
+
+            <!-- == weather details -->
+            <div class="weather__details">
+              <div class="weather__weather-box">
+                <span class="weather__detail-title">Feels Like</span>
+                <h3 class="weather__detail-value" id="feels-like"></h3>
+              </div>
+
+              <div class="weather__weather-box">
+                <span class="weather__detail-title">Humidity</span>
+                <h3 class="weather__detail-value" id="humidity"></h3>
+              </div>
+
+              <div class="weather__weather-box">
+                <span class="weather__detail-title">Wind</span>
+                <h3 class="weather__detail-value" id="wind-speed"></h3>
+              </div>
+
+              <div class="weather__weather-box">
+                <span class="weather__detail-title">Precipitation</span>
+                <h3 class="weather__detail-value" id="precipitation"></h3>
+              </div>
+            </div>
+          </div>
+
+          <!-- ====== Daily forecast ======  -->
+          <div class="weather__daily-forecast">
+            <h2 class="weather__forecast-title">Daily Forecast</h2>
+            <ul class="weather__forecast-list" id="daily-forecastList"></ul>
+          </div>
+        </section>
+
+        <section class="weather__right-section">
+          <header class="weather__header">
+            <h2 class="weather__forecast-title">Hourly Forecast</h2>
+            <div class="weather__days">
+              <button class="weather__button" id="hourly-forecastBtn">
+                <span id="week-day" data-day="tue">Tuesday</span>
+                <img src="./images/icon-dropdown.svg" alt="dropdown icon" />
+              </button>
+              <ul class="weather__days-list" id="days-list">
+                <li class="weather__day-item" data-day="monday">Monday</li>
+                <li class="weather__day-item" data-day="tuesday">Tuesday</li>
+                <li class="weather__day-item" data-day="wednesday">
+                  Wednesday
+                </li>
+                <li class="weather__day-item" data-day="thursday">Thursday</li>
+                <li class="weather__day-item" data-day="friday">Friday</li>
+                <li class="weather__day-item" data-day="saturday">Saturday</li>
+                <li class="weather__day-item" data-day="sunday">Sunday</li>
+              </ul>
+            </div>
+          </header>
+
+          <ul class="weather__forecast-list" id="hourly-forecastList"></ul>
+        </section>
+      </main>
+    </div>
+
+    <section class="api-error">
+      <img src="./images/icon-error.svg" class="api-error__icon" alt="" />
+      <h2 class="api-error__title">Something went wrong</h2>
+      <p class="api-error__description">
+        We couldn't conntect to the server (API error).Please try <br />
+        again in few minutes
+      </p>
+      <button class="api-error__button" id="retry-btn">
+        <img src="./images/icon-retry.svg" alt="" />
+        Retry
+      </button>
+    </section>
+
+    <script type="module" src="./js/units.js"></script>
+    <script type="module" src="./js/search-bar.js"></script>
+    <script type="module" src="./js/daily-forecast.js"></script>
+    <script type="module" src="./js/hourly-forecast.js"></script>
+    <script type="module" src="./js/current-weather.js"></script>
+  </body>
+</html>

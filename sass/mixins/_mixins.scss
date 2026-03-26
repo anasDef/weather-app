@@ -1,0 +1,103 @@
+@use "../variables/variables" as *;
+
+// ─── Responsive Breakpoints ───────────────────────────────────────────────────
+//
+// Usage:
+//   @include breakpoints("small")  { ... }  → mobile  (max-width: 767px)
+//   @include breakpoints("medium") { ... }  → tablet  (768px – 1119px)
+//   @include breakpoints("large")  { ... }  → desktop (min-width: 1200px)
+//
+@mixin breakpoints($device-width) {
+  @if $device-width == "small" {
+    @media screen and (max-width: 767px) {
+      @content;
+    }
+  } @else if $device-width == "medium" {
+    @media screen and (min-width: 768px) and (max-width: 1119px) {
+      @content;
+    }
+  } @else if $device-width == "large" {
+    @media screen and (min-width: 1200px) {
+      @content;
+    }
+  }
+}
+
+// ─── Dropdown / Suggestions Panel ─────────────────────────────────────────────
+//
+// Shared styles for any floating panel that contains a list of options.
+// Used by: header units dropdown (.header__lists) and search suggestions (.search__suggestions)
+//
+// @param {Length} $width - Width of the panel (e.g. 100%, 200px)
+//
+@mixin droplist($width) {
+  width: $width;
+  height: fit-content;
+  padding: 5px;
+  position: absolute;
+  right: 0;
+  border: 1px solid $neutral-600;
+  border-radius: 10px;
+  background-color: $neutral-800;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 33; // Ensures the panel renders above all page content
+
+  & li {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid transparent; // Transparent by default; becomes visible on hover
+    cursor: pointer;
+    color: $neutral-0;
+
+    &:hover {
+      border: 1px solid $neutral-600;
+      background-color: $neutral-700;
+    }
+  }
+}
+
+// ─── Reusable Button ──────────────────────────────────────────────────────────
+//
+// Base styles for interactive buttons throughout the app.
+// Callers control size, shape, and color; this mixin handles layout and transitions.
+//
+// @param {Color}  $bg       - Default background color
+// @param {Color}  $bg-hover - Background color on hover
+// @param {Length} $radius   - Border radius
+// @param {Length} $w        - Width
+// @param {Length} $h        - Height
+//
+@mixin button($bg, $bg-hover, $radius, $w, $h) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $bg;
+  border-radius: $radius;
+  width: $w;
+  height: $h;
+  transition: 0.3s ease;
+  font-family: $font-dmSans;
+  font-weight: $fw-500;
+  color: $neutral-0;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $bg-hover;
+  }
+}
+
+// forecast card
+@mixin forecast-card($flex-dir, $bg) {
+  background-color: $bg;
+  display: flex;
+  flex-direction: $flex-dir;
+  align-items: center;
+  justify-content: space-between;
+  color: $neutral-0;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}

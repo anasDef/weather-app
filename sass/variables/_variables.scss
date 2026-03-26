@@ -1,0 +1,27 @@
+// ─── Neutral Colors ───────────────────────────────────────────────────────────
+// Dark-to-light scale used for backgrounds, borders, and text across the app
+$neutral-900: hsl(243, 96%, 9%); // Darkest — page background
+$neutral-800: hsl(243, 27%, 20%); // Card / component background
+$neutral-700: hsl(243, 23%, 24%); // Hover state background
+$neutral-600: hsl(243, 23%, 30%); // Border color
+$neutral-300: hsl(240, 6%, 70%); // Muted / secondary text
+$neutral-200: hsl(250, 6%, 84%); // Input text / light labels
+$neutral-0: hsl(0, 0%, 100%); // White — primary text and icons
+
+// ─── Orange ───────────────────────────────────────────────────────────────────
+$orange-500: hsl(28, 100%, 52%); // Accent color (reserved for highlights)
+
+// ─── Blue ─────────────────────────────────────────────────────────────────────
+$blue-500: hsl(233, 67%, 56%); // Primary button background
+$blue-700: hsl(248, 70%, 36%); // Primary button hover state
+
+// ─── Typography ───────────────────────────────────────────────────────────────
+$font-bricolage:
+  "Bricolage Grotesque", sans-serif; // Used for large display headings
+$font-dmSans: "DM Sans", sans-serif; // Used for body text and UI elements
+
+// ─── Font Weights ─────────────────────────────────────────────────────────────
+$fw-300: 300;
+$fw-500: 500;
+$fw-600: 600;
+$fw-700: 700;

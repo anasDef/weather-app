@@ -1,0 +1,100 @@
+@use "../mixins/mixins" as *;
+@use "../variables/variables" as *;
+
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: 30px;
+  gap: 40px;
+
+  // Large display heading above the search bar
+  &__title {
+    margin: 0;
+    font-family: $font-bricolage;
+    // Fluid font size: scales between 2rem and 3rem based on viewport width
+    font-size: clamp(2rem, 5.5vw, 3rem);
+    font-weight: $fw-700;
+    color: $neutral-0;
+    text-align: center;
+  }
+
+  // Row that contains the input wrapper and the search button
+  &__search-bar {
+    display: flex;
+    align-items: center;
+    width: 56%;
+    gap: 20px;
+
+    // On mobile, stack input and button vertically and go full width
+    @include breakpoints("small") {
+      width: 100%;
+      flex-direction: column;
+    }
+  }
+
+  // Input field wrapper — holds the search icon, input, and suggestions dropdown
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: $neutral-800;
+    border-radius: 10px;
+    height: 45px;
+    padding: 15px;
+    position: relative; // Anchor for the absolutely-positioned suggestions list
+  }
+
+  &__search-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  &__input {
+    border: none;
+    background-color: transparent; // Inherits the wrapper's background
+    color: $neutral-200;
+    font-size: 1rem;
+    font-weight: $fw-500;
+    font-family: $font-dmSans;
+    width: 100%;
+  }
+
+  // Suggestions dropdown — hidden by default, shown when JS adds .show
+  &__suggestions {
+    @include droplist(100%);
+    top: 130%; // Positions just below the input wrapper
+    display: none;
+
+    &.show {
+      display: block;
+    }
+
+    // Secondary text under each suggestion (country, region)
+    .search__place-details {
+      color: $neutral-300;
+      font-size: 0.8rem;
+    }
+  }
+
+  // Search trigger button
+  &__search-btn {
+    @include button(
+      $bg: $blue-500,
+      $bg-hover: $blue-700,
+      $radius: 10px,
+      $w: 100px,
+      $h: 45px
+    );
+    min-width: 100px;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: $fw-500;
+
+    // Full width on mobile to match the stacked input above it
+    @include breakpoints("small") {
+      width: 100%;
+    }
+  }
+}
