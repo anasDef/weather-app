@@ -9,7 +9,7 @@
  *
  * @dependencies
  *  - search-bar.js : Provides `getWeatherInformation()` to re-fetch weather when units change,
- *                    and `location` to pass the current location into that re-fetch.
+ *  - default-location.js : Provides the default location object { place, country, latitude, longitude }
  *
  * @exports units - The currently active unit configuration object { temperature, wind, precipitation }
  */

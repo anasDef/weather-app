@@ -11,9 +11,9 @@
  * - current-weather.js : Provides renderWeatherInformation() to render current conditions
  * - daily-forecast.js   : Provides renderDailyForecast() to render the 7-day forecast
  * - hourly-forecast.js  : Provides renderHourlyForecast() to render the detailed hourly breakdown
+ * - default-location.js : Provides the default location object { place, country, latitude, longitude }
  *
  * @exports weatherInformation - The raw weather data object returned from the Open-Meteo Forecast API
- * @exports location           - The currently selected location object { place, country, latitude, longitude }
  * @exports getWeatherInformation - Fetches weather data for a given location and unit configuration
  */
 
@@ -21,6 +21,7 @@ import { units } from "./units.js";
 import { renderWeatherInformation } from "./current-weather.js";
 import { renderDailyForecast } from "./daily-forecast.js";
 import { renderHourlyForecast } from "./hourly-forecast.js";
+import { location } from "./default-location.js";
 
 // ─── DOM Element References ───────────────────────────────────────────────────
 
@@ -34,9 +35,6 @@ const containerElement = document.getElementById("container");
 
 /** @type {Object} Holds the full weather response from the forecast API, plus a `location` string */
 export let weatherInformation = {};
-
-/** @type {Object} Holds the currently selected location's coordinates and display name */
-export let location = {};
 
 /**
  * A local copy of the suggestions array from the last geocoding response.
