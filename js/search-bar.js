@@ -263,6 +263,7 @@ export async function getWeatherInformation(locationObject, unitsObject) {
     renderHourlyForecast();
   } catch (err) {
     document.body.classList.add("error");
+    console.log(`error: ${err}`);
   }
 }
 

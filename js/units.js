@@ -15,7 +15,7 @@
  */
 
 import { getWeatherInformation } from "./search-bar.js";
-import { location } from "./search-bar.js";
+import { location } from "./default-location.js";
 
 // ─── DOM Element References ───────────────────────────────────────────────────
 

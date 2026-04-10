@@ -14,11 +14,6 @@ export let location = {
 };
 
 /**
- * Placeholder for the weather data returned by the API.
- */
-export let weatherInformation = {};
-
-/**
  * Wrap the Geolocation API in a Promise so it can be used with async/await.
  *
  * @returns {Promise<GeolocationPosition>} Resolves with the position object.
