@@ -1,0 +1,7 @@
+GOAL:
+    - get the user location as a default location
+    - if he didn't agree use jeddah as a default location
+
+=================================================
+
+IMPLEMENTATION:

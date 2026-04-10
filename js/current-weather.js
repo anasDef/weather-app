@@ -11,7 +11,6 @@
  */
 
 import { weatherInformation } from "./search-bar.js";
-
 // ─── DOM Element References ───────────────────────────────────────────────────
 
 const locationElement = document.getElementById("location");
